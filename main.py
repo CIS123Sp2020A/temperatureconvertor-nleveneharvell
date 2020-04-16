@@ -1,35 +1,60 @@
-#Your name goes here
+#Nava Levene-Harvell
+#Tempurature Converter 
 
-#Your algorithm should go here OR you should use comments throughout
-
-#Your code goes here
 import tkinter
-import tkinter.messagebox as box 
+import tkinter.messagebox
 
-class FahrenConverterGUI:
+class TempConverter:
     def __init__(self):
-      # Create the main window
-        self.main_window = tkinter.Tk()
+        #main window
+        self.mainWindow = tkinter.Tk()
 
-        # Create two frames to group widgets
-        self.top_frame = tkinter.Frame(self.main_window)
-        self.bottom_frame = tkinter.Frame(self.main_window)
+        #two frames
+        self.topFrame = tkinter.Frame(self.mainWindow)
+        self.bottomFrame = tkinter.Frame(self.mainWindow)
 
-        #Create widgets for the top frame
+        #user entry and label 
+        self.promptLabel = tkinter.Label(self.topFrame,
+                                        text = "Enter a temperature in Ferinheight:")
+        self.tempEntry = tkinter.Entry(self.topFrame,
+                                       width = 10)
+        #pack the top
+        self.promptLabel.pack(side = 'left')
+        self.tempEntry.pack(side = 'left')
+
+        #make the buttons
+        self.calcButton = tkinter.Button(self.bottomFrame,
+                                         text = "Convert",
+                                         command = self.convert)
+        self.quitButton = tkinter.Button(self.bottomFrame,
+                                         text = "Quit",
+                                         command = self.mainWindow.destroy)
+
+        #pack buttons
+        self.calcButton.pack(side = 'left')
+        self.quitButton.pack(side = 'left')
+
+        #pack frames
+        self.topFrame.pack()
+        self.bottomFrame.pack()
+
+        tkinter.mainloop()
+
+##convert f to c in temperature     
+    def convert(self):
+
+        #get temp val
+        ferin = float(self.tempEntry.get())
+
+        #convert f to c
+        celsius = (ferin - 32) * (5/9)
+
+        #display results
+        tkinter.messagebox.showinfo("Results",
+                                    str(ferin) +
+                                    " Ferinheight is equal to " +
+                                    str(celsius) + ' Celsuis.')
+
+#instance of class
+tempConv = TempConverter()
         
-        #Pack the top frame's widgets
-        
-        #Create widgets for the bottom frame
-        self.quit_button = tkinter.Button(self.bottom_frame,
-                                          text='Quit',
-                                          command=self.main_window.destroy)
-        
-        #Pack the bottom frame's widgets
-        self.quit_button.pack(side='left')
-      
-        # Pack the frames
-        self.top_frame.pack()
-        self.bottom_frame.pack()
-        
-        
-temp_converter = FahrenConverterGUI()
